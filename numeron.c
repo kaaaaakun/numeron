@@ -3,11 +3,11 @@
 #include <time.h>
 
 int hasDuplicate(char guess[]) {
-	for (int i = 0; guess[i] != '\0' ; i++)
-	{
-		if (guess[i] < '0' || '9' < guess[i] || 10 < i)
-			return 1;
-	}
+	// for (int i = 0; guess[i] != '\0' ; i++)
+	// {
+	// 	if (guess[i] < '0' || '9' < guess[i] || 10 < i)
+	// 		return 1;
+	// }
 	for (int i = 0; i < 4; i++) {
         for (int j = i + 1; j < 4; j++) {
             if (guess[i] == guess[j]) {
