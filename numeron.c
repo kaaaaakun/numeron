@@ -2,8 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 
-int hasDuplicate(int guess[]) {
-    for (int i = 0; i < 4; i++) {
+int hasDuplicate(char guess[]) {
+	for (int i = 0; guess[i] != '\0' ; i++)
+	{
+		if (guess[i] < '0' || '9' < guess[i] || 10 < i)
+			return 1;
+	}
+	for (int i = 0; i < 4; i++) {
         for (int j = i + 1; j < 4; j++) {
             if (guess[i] == guess[j]) {
                 return 1; // 重複が見つかった場合、エラーとして1を返す
@@ -14,24 +19,24 @@ int hasDuplicate(int guess[]) {
 }
 
 int main() {
-    int target[4];  // 目標の4桁の数字
-    int guess[4];   // プレイヤーの予想の4桁の数字
+    char target[4];  // 目標の4桁の数字
+    char guess[4];   // プレイヤーの予想の4桁の数字
     int attempts = 0;  // プレイヤーの試行回数
 
     srand(time(0));
 
-    target[0] = rand() % 10;
+    target[0] = rand() % 10 + 48;
 
     do {
-        target[1] = rand() % 10;
+        target[1] = rand() % 10 + 48;
     } while (target[1] == target[0]);
 
     do {
-        target[2] = rand() % 10;
+        target[2] = rand() % 10 + 48;
     } while (target[2] == target[0] || target[2] == target[1]);
 
     do {
-        target[3] = rand() % 10;
+        target[3] = rand() % 10 + 48;
     } while (target[3] == target[0]  || target[3] == target[1]|| target[3] == target[2]);
 
     printf("数当てゲームを開始します！\n");
@@ -42,8 +47,8 @@ int main() {
         int breaks = 0;  // ブレークの数
 
         printf("\n4桁の数字を入力してください（重複は不可）: ");
-        if (scanf("%1d%1d%1d%1d", &guess[0], &guess[1], &guess[2], &guess[3]) != 4 || hasDuplicate(guess)) {
-            printf("入力が無効です。重複があるか、4桁の数字を正しく入力してください。\n");
+        if (scanf("%1c%1c%1c%1c", &guess[0], &guess[1], &guess[2], &guess[3]) != 4 || hasDuplicate(guess)) {
+            printf("入力が無効です。正しい4桁の数字を正しく入力してください。\n");
             fflush(stdin); // 入力バッファをクリア
             continue; // ループを継続して入力をやり直す
         }
